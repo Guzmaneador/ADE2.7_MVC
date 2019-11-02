@@ -1,4 +1,4 @@
-package Modelo;
+package Modelo.DepartamentosDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
