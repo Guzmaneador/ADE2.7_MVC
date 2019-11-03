@@ -2,6 +2,9 @@ package Controlador;
 
 import Modelo.Modelo;
 import Vista.Vista;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,8 +19,12 @@ public class ControladorImpl implements Controlador {
         this.vista = vista;
     }
     
-    public void start(){
-        
+    public void iniciar(){
+        try {
+            modelo.start(vista.getComandosSQLInicio());
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
     }
