@@ -60,9 +60,9 @@ public class VistaImpl implements Vista{
         comandosSQLInicio.add("Insert INTO empleados VALUES ('35987468H','Susana','Administrativo','CONTABLE','1945-11-24','981.35','10');");
         comandosSQLInicio.add("Insert INTO empleados VALUES ('73155874Q','Roberto','Empleado','VENDEDOR','1979-08-31','1000','30');");
 
-        comandosSQLInicio.add("INSERT INTO login VALUES ('17845789K',AES_ENCRYPT('Contraseña', 'Antonio1'));");
-        comandosSQLInicio.add("Insert INTO login VALUES ('35987468H',AES_ENCRYPT('Contraseña', 'Susana1'));");
-        comandosSQLInicio.add("Insert INTO login VALUES ('73155874Q',AES_ENCRYPT('Contraseña', 'Roberto1'));");
+        comandosSQLInicio.add("INSERT INTO login VALUES ('17845789K',AES_ENCRYPT('NoLoVesJeJe', 'Antonio1'));");
+        comandosSQLInicio.add("Insert INTO login VALUES ('35987468H',AES_ENCRYPT('NoLoVesJeJe', 'Susana1'));");
+        comandosSQLInicio.add("Insert INTO login VALUES ('73155874Q',AES_ENCRYPT('NoLoVesJeJe', 'Roberto1'));");
 
 
     }

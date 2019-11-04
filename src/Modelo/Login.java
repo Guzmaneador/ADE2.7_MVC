@@ -27,6 +27,11 @@ public class Login {
         this.contraseña = userPass.get(1);
         this.conexion=conexion;
         analizarDatos();
+        /*
+        Modelo devuelve un objeto EmpleadosVO de tipo empleado el cual trata la interfa
+        Cambia los valores de de este en caso de que ek usuario los modifique 
+        y le manda dicho obejoto al la clase EmpleadosDAO
+        */
         
     }
     public void analizarDatos() throws SQLException{
@@ -82,12 +87,8 @@ public class Login {
        if(clave != null)    
                    contraseñaCorrecta= true;
 
-      
 
 //        System.out.println(clave);
-
-       
-       
         return contraseñaCorrecta;
 //        return false;
         
