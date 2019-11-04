@@ -15,6 +15,7 @@ public class VistaImpl implements Vista{
         llenarArraySQLInicio();
     }
     
+    @Override
     public ArrayList <String>  solicitarLogin(){
         ArrayList <String> userPass= new ArrayList();
         System.out.print("-->Indica tu usuario: ");

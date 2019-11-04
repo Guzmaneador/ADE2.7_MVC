@@ -14,17 +14,30 @@ import java.util.ArrayList;
 public class Login {
     String usuario,contraseña;
     String nif,tipo;
-    String SQL_SELECT_EMPLEADOS= "SELECT nombre FROM empleados";
+    String SQL_SELECT_EMPLEADOS= "SELECT nombre, tipo FROM empleados";
     String SQL_SELECT_NIF="SELECT nif FROM empleados WHERE id=?";
     String SQL_COMPARE_PASSWORD="SELECT AES_DECRYPT('password', '?') FROM login WHERE nif=?";
     ResultSet resultado ;
     Connection conexion;
 
     public Login(ArrayList<String> userPass,Connection conexion) throws SQLException {
-        this.usuario = usuario;
-        this.contraseña = contraseña;
+        this.usuario = userPass.get(0);
+        this.contraseña = userPass.get(1);
         this.conexion=conexion;
+        analizarDatos();
         
+    }
+    public void analizarDatos() throws SQLException{
+        if(verificarUser()){
+            obtenerNif();
+            if(compararPassword()){
+                System.out.println("--USUARIO LOGEADO--");
+            }else{
+                System.out.println("Datos Incorrectos2");
+            }
+        }else{
+            System.out.println("Datos incorrectos");
+        }
     }
     
     public boolean verificarUser() throws SQLException{
@@ -40,7 +53,7 @@ public class Login {
         } 
         return existe;    
     }
-    public void obtenernif() throws SQLException{
+    public void obtenerNif() throws SQLException{
        PreparedStatement miPreStatment= conexion.prepareCall(SQL_SELECT_NIF);
        miPreStatment.setString(0, usuario);
        resultado=miPreStatment.executeQuery();

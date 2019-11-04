@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
  *
  * @author Guzman
@@ -26,7 +27,15 @@ public class ModeloImpl implements Modelo{
                  System.out.println(resultadoUpdate);
         }
 
-        conexion.close();
+//        conexion.close();
+    }
+    public void login(ArrayList<String> userPass){
+        try {
+            Login miLogin = new Login(userPass,conexion);
+        } catch (SQLException ex) {
+            Logger.getLogger(ModeloImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
 }

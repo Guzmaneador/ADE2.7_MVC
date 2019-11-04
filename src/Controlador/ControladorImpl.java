@@ -19,9 +19,11 @@ public class ControladorImpl implements Controlador {
         this.vista = vista;
     }
     
+    @Override
     public void iniciar(){
         try {
             modelo.start(vista.getComandosSQLInicio());
+            modelo.login(vista.solicitarLogin());
         } catch (SQLException ex) {
             Logger.getLogger(ControladorImpl.class.getName()).log(Level.SEVERE, null, ex);
         }

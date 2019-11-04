@@ -8,5 +8,6 @@ import java.util.ArrayList;
  */
 public interface Vista {
     public ArrayList<String> getComandosSQLInicio();
+    public ArrayList <String>  solicitarLogin();
 
 }
