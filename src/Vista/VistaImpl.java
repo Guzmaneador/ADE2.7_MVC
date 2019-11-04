@@ -20,7 +20,7 @@ public class VistaImpl implements Vista{
         ArrayList <String> userPass= new ArrayList();
         System.out.print("-->Indica tu usuario: ");
         userPass.add(teclado.nextLine());
-        System.out.println("-->Introduce tu contrseña: ");
+        System.out.print("-->Introduce tu contrseña: ");
         userPass.add(teclado.nextLine());
         return userPass;
         

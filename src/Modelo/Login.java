@@ -3,6 +3,7 @@ package Modelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -15,8 +16,9 @@ public class Login {
     String usuario,contraseña;
     String nif,tipo;
     String SQL_SELECT_EMPLEADOS= "SELECT nombre, tipo FROM empleados";
-    String SQL_SELECT_NIF="SELECT nif FROM empleados WHERE id=?";
-    String SQL_COMPARE_PASSWORD="SELECT AES_DECRYPT('password', '?') FROM login WHERE nif=?";
+    String SQL_SELECT_NIF="SELECT nif FROM `empleados` WHERE nombre=?";
+//    String SQL_COMPARE_PASSWORD="SELECT AES_DECRYPT(password) FROM login WHERE nif=?";
+    String SQL_COMPARE_PASSWORD="SELECT AES_DECRYPT(password, ?) FROM login WHERE nif=?";
     ResultSet resultado ;
     Connection conexion;
 
@@ -55,16 +57,40 @@ public class Login {
     }
     public void obtenerNif() throws SQLException{
        PreparedStatement miPreStatment= conexion.prepareCall(SQL_SELECT_NIF);
-       miPreStatment.setString(0, usuario);
+       miPreStatment.setString(1, usuario);
        resultado=miPreStatment.executeQuery();
-       nif=resultado.getString("nif");
+       if(resultado.next())
+        nif=resultado.getString("nif");
+       
+//        System.out.println(nif);
     }
+    //SELECT AES_DECRYPT(password, 'Antonio1') FROM login WHERE nif='17845789K';
     public boolean compararPassword() throws SQLException{
-        PreparedStatement miPreStatment= conexion.prepareCall(SQL_SELECT_NIF);
-       miPreStatment.setString(0, contraseña);
-       miPreStatment.setString(1, nif);
+        String clave= "";
+       boolean contraseñaCorrecta =false;
+       PreparedStatement miPreStatment= conexion.prepareCall(SQL_COMPARE_PASSWORD);
+       miPreStatment.setString(1, contraseña);
+       miPreStatment.setString(1, contraseña);
+       miPreStatment.setString(2, nif);
+//        System.out.println(miPreStatment);
+       
        resultado=miPreStatment.executeQuery();
-       return resultado.getBoolean("password");
+       ResultSetMetaData rsmd = resultado.getMetaData();
+       if(resultado.next())
+              clave=resultado.getString(rsmd.getColumnName(1));
+//            System.out.println(rsmd.getColumnName(1));
+       if(clave != null)    
+                   contraseñaCorrecta= true;
+
+      
+
+//        System.out.println(clave);
+
+       
+       
+        return contraseñaCorrecta;
+//        return false;
+        
         
     }
 
